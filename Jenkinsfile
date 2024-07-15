@@ -24,13 +24,26 @@ pipeline {
                 }
             }
         }   
-        stage('Build') {
-            steps {
-                echo 'Compilando el código...'
-            }
-        }
+        stage ('Security SAST')
+          parallel{
+             stage('Gitleaks-Scan') {
+                    agent {
+                        docker {
+                            image 'zricethezav/gitleaks'
+                            args '--entrypoint="" -u root -v ${WORKSPACE}:/src'
+                        }
+                    }                    
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            script {
+                                sh "gitleaks detect --verbose --source . -f json -r /src/report_gitleaks.json"
+                                stash includes: 'report_gitleaks.json', name: 'report_gitleaks.json'
+                            }
+                        }
+                    }
+                }
 
-        stage('Snyk Test') {
+          stage('Snyk Test') {
            agent {
              docker {
              image 'snyk/snyk:node'
@@ -47,6 +60,14 @@ pipeline {
              }
 
            }
+       }
+
+        stage('Build') {
+            steps {
+                echo 'Compilando el código...'
+            }
+        }
+
         
 
         stage('Pruebas') {
