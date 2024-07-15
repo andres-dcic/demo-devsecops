@@ -6,7 +6,7 @@ pipeline {
         //VERSION = sh(script: 'jq --raw-output .version package.json', returnStdout: true).trim()
         //REPO = sh(script: 'basename `git rev-parse --show-toplevel`', returnStdout: true).trim()
         //REGISTRY = credentials('registry-hub')
-        SNYK_CREDENTIALS = credentials('snyk-token2')
+        SNYK_CREDENTIALS = credentials('snyk-token')
     }
 
     stages {
@@ -20,8 +20,8 @@ pipeline {
            steps {
                echo 'testing'
                 snykSecurity(
-                 snykInstallation: 'snyk-token2',
-                 snykTokenId: 'snyk-token2',
+                 snykInstallation: 'snyk-token',
+                 snykTokenId: 'snyk-token',
                 // place other optional parameters here, for example:
                     additionalArguments: '--all-projects --detection-depth=5'
                 )
