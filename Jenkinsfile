@@ -17,14 +17,14 @@ pipeline {
         }
 
         stage('Snyk Test') {
+           agent {
+             docker {
+             image 'snyk/snyk:node'
+             args '--entrypoint="" -e SNYK_TOKEN=$SNYK_CREDENTIALS -u root:root -v ${WORKSPACE}:/src'
+             }
+            }      
            steps {
                echo 'testing'
-                snykSecurity(
-                 snykInstallation: 'snyk-token',
-                 snykTokenId: 'snyk-token',
-                // place other optional parameters here, for example:
-                    additionalArguments: '--all-projects --detection-depth=5'
-                )
                }
            }
         
