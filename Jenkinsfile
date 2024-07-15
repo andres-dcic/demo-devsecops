@@ -18,10 +18,13 @@ pipeline {
 
         stage('Snyk Test') {
            steps {
-               script {
-                   // Run Snyk test
-                   sh 'snyk test --json > snyk_report.json'
-                    }
+               echo 'testing'
+                snykSecurity(
+                 snykInstallation: 'snyk-token2',
+                 snykTokenId: 'af47e653-a4af-43bd-81f2-0c4742afe8c1',
+                // place other optional parameters here, for example:
+                    additionalArguments: '--all-projects --detection-depth=5'
+                )
                }
            }
         
