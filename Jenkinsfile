@@ -20,8 +20,8 @@ pipeline {
            steps {
                script {
                    // Run Snyk test
-                   withCredentials([string(credentialsId: '670bb3b9-9421-42c7-a754-46555b9ec3bf', variable: 'snyk-token')]) {
-                       sh 'snyk test --token=$snyk-token'
+                   withCredentials([string(credentialsId: '670bb3b9-9421-42c7-a754-46555b9ec3bf')]) {
+                       sh 'snyk test --token=$SNYK_CREDENTIALS'
                    }
                }
            }
