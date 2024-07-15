@@ -22,10 +22,16 @@ pipeline {
              image 'snyk/snyk:node'
              args '--entrypoint="" -e SNYK_TOKEN=$SNYK_CREDENTIALS -u root:root -v ${WORKSPACE}:/src'
              }
-            }      
-           steps {
-               echo 'testing'
-               }
+            }     
+            steps {
+                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script {
+                    sh "snyk test --json --file=package.json --severity-threshold=high --print-deps --print-deps-uses --print-vulnerabilities --print-trace --print-all-environment --json-file-output=report_snyk.json"
+                    stash includes: 'report_snyk.json', name: 'report_snyk.json'
+                     }
+                  }
+             }
+
            }
         
 
