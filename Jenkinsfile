@@ -24,8 +24,7 @@ pipeline {
                     }
                }
            }
-        }
-
+        
 
         stage('Pruebas') {
             steps {
