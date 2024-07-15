@@ -10,6 +10,20 @@ pipeline {
     }
 
     stages {
+
+        stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:16-alpine'
+                    args '-u root:root'
+                }
+            }
+            steps {
+                script {
+                    sh 'npm install'
+                }
+            }
+        }   
         stage('Build') {
             steps {
                 echo 'Compilando el código...'
