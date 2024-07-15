@@ -20,7 +20,7 @@ pipeline {
            steps {
                script {
                    // Run Snyk test
-                   //sh 'snyk test --json > snyk_report.json'
+                   sh 'snyk test --json > snyk_report.json'
                     }
                }
            }
