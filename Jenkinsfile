@@ -25,7 +25,7 @@ pipeline {
             }
         }   
         stage ('Security SAST')
-          parallel{
+          parallel {
              stage('Gitleaks-Scan') {
                     agent {
                         docker {
