@@ -70,7 +70,7 @@ pipeline {
          stage('Docker Build') {
             steps {
                 script {
-                    sh "docker build -t $REGISTRY/$REPO:$VERSION ."
+                    sh 'docker build -t $REGISTRY/$REPO:$VERSION .'
                 }
             }
         }
