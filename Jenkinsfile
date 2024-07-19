@@ -80,7 +80,7 @@ pipeline {
          stage('Trivy-Scan') {
             agent {
                 docker {
-                    image 'aquasec/trivy:latest'
+                    image 'aquasec/trivy:0.48.1'
                     args '--entrypoint="" -u root -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}:/src'
                 }
             }
