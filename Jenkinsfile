@@ -88,7 +88,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     script {
-                        sh "trivy image --format json --output /src/report_trivy.json $REGISTRY/$REPO:$VERSION"
+                        sh "trivy image --format json --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
                         stash includes: 'report_trivy.json', name: 'report_trivy.json'
                     }
                 }
