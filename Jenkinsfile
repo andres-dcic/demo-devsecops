@@ -78,6 +78,22 @@ pipeline {
                 }
             }
         }
+         stage('Trivy-Scan') {
+            agent {
+                docker {
+                    image 'aquasec/trivy:0.48.1'
+                    args '--entrypoint="" -u root -v /var/run/docker.sock:/var/run/docker.sock -v ${WORKSPACE}:/src'
+                }
+            }
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script {
+                        sh "trivy image --format json --output /src/report_trivy.json $REGISTRY/$REPO:$VERSION"
+                        stash includes: 'report_trivy.json', name: 'report_trivy.json'
+                    }
+                }
+            }
+        }
 
         
 
