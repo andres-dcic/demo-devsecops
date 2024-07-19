@@ -86,7 +86,6 @@ pipeline {
                 }
             }
             steps {
-                timeout(time: 20, unit: 'MINUTES')
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     
                     script {
