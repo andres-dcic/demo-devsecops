@@ -7,7 +7,6 @@ pipeline {
         REPO = sh(script: 'basename `git rev-parse --show-toplevel`', returnStdout: true).trim()
         REGISTRY = credentials('registry-hub')
         DOCKER_ID = credentials('DOCKER_ID')
-
         SNYK_CREDENTIALS = credentials('snyk-token')
     }
 
@@ -89,7 +88,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     
                     script {
-                        sh "trivy image --format json --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
+                        sh "trivy image --timeout 10m --format json --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
                         stash includes: 'report_trivy.json', name: 'report_trivy.json'
                     }
                 }
