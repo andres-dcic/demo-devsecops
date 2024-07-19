@@ -7,6 +7,7 @@ pipeline {
         REPO = sh(script: 'basename `git rev-parse --show-toplevel`', returnStdout: true).trim()
         REGISTRY = credentials('registry-hub')
         DOCKER_ID = credentials('DOCKER_ID')
+
         SNYK_CREDENTIALS = credentials('snyk-token')
     }
 
@@ -73,7 +74,7 @@ pipeline {
          stage('Docker Build') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_ID/$REPO:$VERSION .'
+                    sh "docker build -t $DOCKER_ID/$REPO:$VERSION ."
                 }
             }
         }
