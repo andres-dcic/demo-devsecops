@@ -1,0 +1,76 @@
+{
+  "version": "v2.9.0-beta.3",
+  "id": "be8b7c25-8685-48fe-a69e-fd3c03d8bb3f",
+  "repositoryID": "00000000-0000-0000-0000-000000000000",
+  "repositoryName": "",
+  "workspaceID": "00000000-0000-0000-0000-000000000000",
+  "workspaceName": "",
+  "status": "error",
+  "errors": "{HORUSEC_CLI} Error while running tool Semgrep: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /home/andres/Gitwork/game-cicd-2048/src/.horusec/be8b7c25-8685-48fe-a69e-fd3c03d8bb3f;{HORUSEC_CLI} Error while running tool Trivy: trivy config cmd: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /home/andres/Gitwork/game-cicd-2048/src/.horusec/be8b7c25-8685-48fe-a69e-fd3c03d8bb3f;{HORUSEC_CLI} Error while running tool NpmAudit: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /home/andres/Gitwork/game-cicd-2048/src/.horusec/be8b7c25-8685-48fe-a69e-fd3c03d8bb3f;{HORUSEC_CLI} Error while running tool YarnAudit: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /home/andres/Gitwork/game-cicd-2048/src/.horusec/be8b7c25-8685-48fe-a69e-fd3c03d8bb3f",
+  "createdAt": "2024-07-19T15:14:24.893681327Z",
+  "finishedAt": "2024-07-19T15:16:33.302280831Z",
+  "analysisVulnerabilities": [
+    {
+      "vulnerabilityID": "00000000-0000-0000-0000-000000000000",
+      "analysisID": "be8b7c25-8685-48fe-a69e-fd3c03d8bb3f",
+      "createdAt": "2024-07-19T15:16:33.302464781Z",
+      "vulnerabilities": {
+        "vulnerabilityID": "9241cefb-4283-4d1c-ad4e-34738c496a05",
+        "line": "1",
+        "column": "0",
+        "confidence": "MEDIUM",
+        "file": "cert/private_key.key",
+        "code": "-----BEGIN RSA PRIVATE KEY-----",
+        "details": "(1/1) * Possible vulnerability detected: Asymmetric Private Key\nFound SSH and/or x.509 Cerficates among the files of your project, make sure you want this kind of information inside your Git repo, since it can be missused by someone with access to any kind of copy.  For more information checkout the CWE-312 (https://cwe.mitre.org/data/definitions/312.html) advisory.",
+        "securityTool": "HorusecEngine",
+        "language": "Leaks",
+        "severity": "CRITICAL",
+        "type": "Vulnerability",
+        "commitAuthor": "-",
+        "commitEmail": "-",
+        "commitHash": "-",
+        "commitMessage": "-",
+        "commitDate": "-",
+        "rule_id": "HS-LEAKS-12",
+        "vulnHash": "9e28d93e8bd0816d2afa3e928a799f8ed5d2f3e92fc155f77a1eaf4ed6216d38",
+        "deprecatedHashes": [
+          "50aea1c47befbc1605be9fbedf4fc7979cb7eee2b45682fd8b93c3697b43cbec",
+          "31c002dfc6f6c8981468f0fbacc74d0d8cff4e2168a036c6754f47d4285f4407"
+        ],
+        "securityToolVersion": "",
+        "securityToolInfoUri": ""
+      }
+    },
+    {
+      "vulnerabilityID": "00000000-0000-0000-0000-000000000000",
+      "analysisID": "be8b7c25-8685-48fe-a69e-fd3c03d8bb3f",
+      "createdAt": "2024-07-19T15:16:33.302457655Z",
+      "vulnerabilities": {
+        "vulnerabilityID": "d89b9957-ab3e-4c61-ae90-46c166d6844c",
+        "line": "81",
+        "column": "31",
+        "confidence": "MEDIUM",
+        "file": "src/.horusec/be8b7c25-8685-48fe-a69e-fd3c03d8bb3f/components/Game/hooks/useGame/useGame.ts",
+        "code": "const index = Math.floor(Math.random() * emptyTiles.length);",
+        "details": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory.",
+        "securityTool": "HorusecEngine",
+        "language": "JavaScript",
+        "severity": "HIGH",
+        "type": "Vulnerability",
+        "commitAuthor": "-",
+        "commitEmail": "-",
+        "commitHash": "-",
+        "commitMessage": "-",
+        "commitDate": "-",
+        "rule_id": "HS-JAVASCRIPT-6",
+        "vulnHash": "c1dba169245781ccfa72f0776125da0ab91d20d2c83d8e56559c8e376cafe853",
+        "deprecatedHashes": [
+          "3d89be74c676358a7bd307b5f4f1d54fb314b3d7265d75764ecd344967a91c54",
+          "b20b4336786115353d0c5c66738eb3344843558e29b180a139b19e0111291b95"
+        ],
+        "securityToolVersion": "",
+        "securityToolInfoUri": ""
+      }
+    }
+  ]
+}
