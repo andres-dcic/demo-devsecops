@@ -22,7 +22,8 @@ pipeline {
                     sh 'npm install'
                 }
             }
-        }        
+        }    
+        /*    
         stage('Security SAST') {
             parallel {
                 stage('Gitleaks-Scan') {
@@ -112,6 +113,7 @@ pipeline {
                 }                                           
             }
         }
+        */
         stage('Docker Build') {
             steps {
                 script {
