@@ -90,8 +90,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     
                     script {
-                        sh "trivy image --reset"
-                        sh "trivy image --timeout 10m --format json --ignore-unfixed  --debug --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
+                        sh "trivy image --timeout 10m --format json --ignore-unfixed  --debug --light $DOCKER_ID/$REPO:$VERSION"
                         stash includes: 'report_trivy.json', name: 'report_trivy.json'
                     }
                 }
