@@ -91,7 +91,7 @@ pipeline {
                     
                     script {
                         sh "trivy image --reset"
-                        sh "trivy image --timeout 10m --format json --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
+                        sh "trivy image --timeout 10m --format json --debug --output /src/report_trivy.json $DOCKER_ID/$REPO:$VERSION"
                         stash includes: 'report_trivy.json', name: 'report_trivy.json'
                     }
                 }
