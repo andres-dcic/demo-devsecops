@@ -29,13 +29,13 @@ export const App = () => {
         </p>
         <ul>
           <li>
-            <a href="" target="_blank">
+            <a href="https://www.youtube.com/watch?v=kQhkkqjGkFA" target="_blank">
               Tutorial (YouTube video)
             </a>
           </li>
           <li>
             <a
-              href="https://www.youtube.com/watch?v=kQhkkqjGkFA"
+              href="https://github.com/andres-dcic/demo-devsecops.git"
               target="_blank"
             >
               Source Code (Github)
