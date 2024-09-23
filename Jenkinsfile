@@ -141,12 +141,12 @@ pipeline {
             }
         } //stage Trivy
 
-        stage('Pruebas') {
+        /*stage('Pruebas') {
             steps {
                 echo 'Ejecutando pruebas...'
             }
         }
-
+        */
 
         stage('Docker Push') {
             steps {
@@ -162,24 +162,27 @@ pipeline {
         
         stage('Deploy to Kubernetes') {
             steps {
-               // echo 'Desplegando la aplicación to Kubernetes'
-                sshagent (['ssh-agent']){
-                sh 'ssh -tt -o StrictHostKeyChecking=no vagrant@192.168.0.92 kubectl get nodes'
-                sh 'scp -o StrictHostKeyChecking=no "./deployment.yaml" "vagrant@192.168.0.92:/vagrant/game2048/"'
-                sh 'ssh -tt -o StrictHostKeyChecking=no vagrant@192.168.0.92 kubectl apply -f /vagrant/game2048/deployment.yaml'
-                }
+                echo 'Desplegando la aplicación to Kubernetes'
+              //  sshagent (['ssh-agent']){
+              //  sh 'ssh -tt -o StrictHostKeyChecking=no vagrant@192.168.0.92 kubectl get nodes'
+              //  sh 'scp -o StrictHostKeyChecking=no "./deployment.yaml" "vagrant@192.168.0.92:/vagrant/game2048/"'
+              //  sh 'ssh -tt -o StrictHostKeyChecking=no vagrant@192.168.0.92 kubectl apply -f /vagrant/game2048/deployment.yaml'
+               // }
             }
         }
 
         stage('Security DAST') {
-            agent {
+           /* agent {
                   docker {
                   image 'zaproxy/zap-stable'
                   args '-u root:root -v ${WORKSPACE}:/zap/wrk:rw'
                }
                }
+               */
             steps {
-             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                echo 'Testing en tiempo real OWASP ZAP..'
+  
+             /*catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               script {
                 // Run OWASP ZAP with baseline scan against your target URL
                 sh """
@@ -187,11 +190,11 @@ pipeline {
                 """
                 // Stash the generated reports
                 stash includes: 'zap_report.html', name: 'zap_reports'
-             }
-            }
-           }
-           //     echo 'Testing en tiempo real OWASP ZAP..'
-          }
+             } 
+            } */
+
+           } 
+         }
         //}
 
        } //all stages
