@@ -141,12 +141,7 @@ pipeline {
             }
         } //stage Trivy
 
-        /*stage('Pruebas') {
-            steps {
-                echo 'Ejecutando pruebas...'
-            }
-        }
-        */
+        
 
         stage('Docker Push') {
             steps {
