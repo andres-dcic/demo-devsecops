@@ -189,7 +189,7 @@ pipeline {
                 zap-baseline.py -t http://192.168.0.92:3001 -g gen.conf -r zap_report.html || true
                 """
                 // Stash the generated reports
-                stash includes: 'zap_report.html', name: 'zap_reports'
+                stash includes: 'zap_report.html', name: 'zap_reports.html'
              } 
             } 
            } 
