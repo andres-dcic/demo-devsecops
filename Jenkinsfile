@@ -6,9 +6,7 @@ pipeline {
         VERSION = sh(script: 'jq --raw-output .version package.json', returnStdout: true).trim()
         REPO = sh(script: 'basename `git rev-parse --show-toplevel`', returnStdout: true).trim()
         REGISTRY = credentials('registry-hub')
-        //DOCKER_ID = credentials('docker-hub')
         SNYK_CREDENTIALS = credentials('snyk-token')
-        // registryCredential = 'dockerhub-credentials'
         SCANNER_HOME=tool 'sonar-scanner'
 
     }
@@ -154,7 +152,7 @@ pipeline {
             }
          } //stage push
 
-        
+        /*
         stage('Deploy to Kubernetes') {
             steps {
                // echo 'Desplegando la aplicación to Kubernetes'
@@ -190,7 +188,7 @@ pipeline {
            } 
          }
          
-        //}
+        */
 
        } //all stages
 }
