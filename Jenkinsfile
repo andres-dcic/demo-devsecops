@@ -152,7 +152,7 @@ pipeline {
             }
          } //stage push
 
-        /*
+        
         stage('Deploy to Kubernetes') {
             steps {
                // echo 'Desplegando la aplicación to Kubernetes'
@@ -188,7 +188,7 @@ pipeline {
            } 
          }
          
-        */
+        
 
        } //all stages
 }
